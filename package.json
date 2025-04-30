@@ -1,0 +1,26 @@
+{
+  "name": "frontend-webtech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/najlaass/Frontend-WebTech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/najlaass/Frontend-WebTech/issues"
+  },
+  "homepage": "https://github.com/najlaass/Frontend-WebTech#readme",
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "kest": "^1.0.0"
+  }
+}
