@@ -42,7 +42,7 @@
                   class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
                   <option v-for="rating in [0, 1, 2, 3, 4, 5]" :key="rating" :value="rating">
-                    {{ rating === 0 ? 'Select rating' : ${rating} star${rating !== 1 ? 's' : ''} }}
+                    {{ rating === 0 ? 'Select rating' : rating + ' star' + (rating !== 1 ? 's' : '') }}
                   </option>
                 </select>
               </td>
