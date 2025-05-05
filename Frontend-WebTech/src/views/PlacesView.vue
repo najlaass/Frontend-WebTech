@@ -1,12 +1,21 @@
+
 <template>
   <div>
-    <h1>SharedPlaces</h1>
-    <PlaceList
-      :places="places"
-      @delete="deletePlace"
-      @update="updatePlace"
-    />
-    <PlaceForm @add="addPlace" />
+    <div class="md:flex md:items-center md:justify-between">
+      <div class="flex-1 min-w-0">
+        <h1 class="text-3xl font-bold leading-7 text-gray-900 sm:text-4xl sm:truncate">
+          SharedPlaces
+        </h1>
+      </div>
+    </div>
+    <div class="mt-8">
+      <PlaceList
+        :places="places"
+        @delete="deletePlace"
+        @update="updatePlace"
+      />
+      <PlaceForm @add="addPlace" />
+    </div>
   </div>
 </template>
 
