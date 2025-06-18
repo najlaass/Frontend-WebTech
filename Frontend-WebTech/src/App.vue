@@ -24,6 +24,9 @@ import ProfileUrl from './assets/Profile-icon.png'
             <router-link to="/" class="nav-link" active-class="active">Home </router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/explore" class="nav-link" active-class="active">Explore </router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/about" class="nav-link" active-class="active">About </router-link>
           </li>
           <li class="nav-item">

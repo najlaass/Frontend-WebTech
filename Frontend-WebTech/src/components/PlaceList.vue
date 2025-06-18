@@ -75,6 +75,7 @@
 </template>
 
 <script setup lang="ts">
+import ProfileUrl from './assets/Profile-icon.png'
 import type { Place } from '../types/place'
 
 const props = defineProps<{
