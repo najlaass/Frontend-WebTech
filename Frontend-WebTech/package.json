@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
@@ -15,7 +15,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
+<<<<<<< HEAD
     "bootstrap": "^5.3.6",
+=======
+    "axios": "^1.9.0",
+>>>>>>> 2a40602a8bcbfcf5c4ff315ff4d7f6ba72d79366
     "tailwindcss": "^4.1.5",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
