@@ -12,6 +12,37 @@
           </tr>
         </thead>
         <tbody>
+        <tr>
+        <td>
+          <input v-model="nameField" type="text" class="form-control" placeholder="Name" />
+        </td>
+        <td>
+          <input
+            v-model="activityField"
+            type="text"
+            class="form-control"
+            placeholder="Activity"
+          />
+        </td>
+        <td>
+              <textarea
+                v-model="descriptionField"
+                class="form-control"
+                placeholder="Description"
+              ></textarea>
+        </td>
+        <td>
+          <select v-model="ratingField" class="form-select">
+            <option disabled value="0">Select</option>
+            <option v-for="r in [1, 2, 3, 4, 5]" :key="r" :value="r">
+              {{ '⭐'.repeat(r) }} ({{ r }})
+            </option>
+          </select>
+        </td>
+        <td class="text-center">
+          <input class="form-check-input" type="checkbox" v-model="visitedField" />
+        </td>
+        </tr>
           <tr v-for="(place, index) in items" :key="index">
             <td>
               <input v-model="place.name" type="text" class="form-control" placeholder="Name" />
@@ -98,7 +129,14 @@ async function loadPlaces() {
 
 // save the new place, push it into items, and clear inputs
 async function handleAddRow() {
-  if (!nameField.value) {
+  if (nameField.value != "") {
+    const newplace: Place = {
+      name: nameField.value,
+      activity: activityField.value,
+      rating: ratingField.value,
+      visited:visitedField.value
+    }
+    await axios.post<Place[]>(endpoint, newplace)
     return alert('Please enter a name for your new place.')
   }
 
@@ -126,5 +164,8 @@ async function handleAddRow() {
   }
 }
 
-onMounted(loadPlaces)
+onMounted(async () => {
+  loadPlaces()
+})
+
 </script>
