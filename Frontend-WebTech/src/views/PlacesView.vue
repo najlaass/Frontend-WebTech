@@ -1,52 +1,130 @@
 <template>
-  <div>
-    <div class="md:flex md:items-center md:justify-between">
-      <div class="flex-1 min-w-0">
-        <h1 class="text-3xl font-bold leading-7 text-gray-900 sm:text-4xl sm:truncate">
-          SharedPlaces
-        </h1>
-      </div>
+  <div class="mb-4">
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Activity</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Visited</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(place, index) in items" :key="index">
+            <td>
+              <input v-model="place.name" type="text" class="form-control" placeholder="Name" />
+            </td>
+            <td>
+              <input
+                v-model="place.activity"
+                type="text"
+                class="form-control"
+                placeholder="Activity"
+              />
+            </td>
+            <td>
+              <textarea
+                v-model="place.description"
+                class="form-control"
+                placeholder="Description"
+              ></textarea>
+            </td>
+            <td>
+              <select v-model="place.rating" class="form-select">
+                <option disabled value="0">Select</option>
+                <option v-for="r in [1, 2, 3, 4, 5]" :key="r" :value="r">
+                  {{ '⭐'.repeat(r) }} ({{ r }})
+                </option>
+              </select>
+            </td>
+            <td class="text-center">
+              <input class="form-check-input" type="checkbox" v-model="place.visited" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="mt-8">
-      <PlaceList
-        :places="places"
-        @delete="deletePlace"
-        @update="updatePlace"
-      />
-      <PlaceForm @add="addPlace" />
+
+    <!-- Button outside bottom right -->
+    <div class="d-flex justify-content-end">
+      <button @click="handleAddRow()" class="btn btn-success">
+        <i class="bi bi-plus-lg me-1"></i> Add New Place
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import PlaceList from '../components/PlaceList.vue'
-import PlaceForm from '../components/PlaceForm.vue'
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
 import type { Place } from '../types/place'
 
-const places = ref<Place[]>([])
 const nextId = ref(1)
 
-const addPlace = () => {
-  const newPlace: Place = {
-    id: nextId.value,
+// reactive list of saved places
+const items = ref<Place[]>([
+  {
+    id: nextId.value, // will be 1
     name: '',
     activity: '',
+    description: '',
     rating: 0,
-    visited: false
+    visited: false,
+  },
+])
+
+// input fields for the “new place” row
+const nameField = ref('')
+const activityField = ref('')
+const descriptionField = ref('')
+const ratingField = ref(0)
+const visitedField = ref(false)
+
+// derive our API endpoint from an env var
+const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
+const endpoint = baseUrl + '/SharedPlaces'
+
+// load existing places on mount
+async function loadPlaces() {
+  try {
+    const res = await axios.get<Place[]>(endpoint)
+    items.value = res.data
+  } catch (e) {
+    console.error('Failed to load places:', e)
   }
-  places.value.push(newPlace)
-  nextId.value++
 }
 
-const updatePlace = (updatedPlace: Place) => {
-  const index = places.value.findIndex(p => p.id === updatedPlace.id)
-  if (index !== -1) {
-    places.value[index] = updatedPlace
+// save the new place, push it into items, and clear inputs
+async function handleAddRow() {
+  if (!nameField.value) {
+    return alert('Please enter a name for your new place.')
+  }
+
+  const payload = {
+    name: nameField.value,
+    activity: activityField.value,
+    description: descriptionField.value,
+    rating: ratingField.value,
+    visited: visitedField.value,
+  }
+
+  try {
+    const res = await axios.post<Place>(endpoint, payload)
+    items.value.push(res.data)
+
+    // clear the inputs
+    nameField.value = ''
+    activityField.value = ''
+    descriptionField.value = ''
+    ratingField.value = 0
+    visitedField.value = false
+  } catch (error) {
+    console.error('Could not save new place:', error)
+    alert('Save failed—check console for details.')
   }
 }
 
-const deletePlace = (id: number) => {
-  places.value = places.value.filter(place => place.id !== id)
-}
+onMounted(loadPlaces)
 </script>
