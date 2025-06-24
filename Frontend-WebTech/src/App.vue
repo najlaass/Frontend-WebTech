@@ -8,14 +8,15 @@ import ProfileUrl from './assets/Profile-icon.png'
   <div class="min-vh-100 bg-lightblue">
     <nav class="navbar navbar-expand bg-white shadow-sm">
       <div class="container">
+        <!-- Updated logo with router-link to Explore -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-          <i class="bi bi-geo-alt-fill fs-3 me-2"></i>
-          <router-link to="/" class="navbar-brand d-flex align-items-center"/>
-          <!-- logo image -->
-          <img :src="logoUrl"
+          <router-link to="/explore">
+            <!-- logo image -->
+            <img :src="logoUrl"
                  alt="SharedPlaces Logo"
                  class="me-2"
                  style="height:50px; width:auto;" />
+          </router-link>
           <div class="lh-sm">
           </div>
         </a>
