@@ -9,6 +9,7 @@
             <th>Description</th>
             <th>Rating</th>
             <th>Visited</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +74,11 @@
             <td class="text-center">
               <input class="form-check-input" type="checkbox" v-model="place.visited" />
             </td>
+            <td class="text-center">
+              <button v-if="place.id" @click="handleDeleteRow(place, index)" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -129,15 +135,15 @@ async function loadPlaces() {
 
 // save the new place, push it into items, and clear inputs
 async function handleAddRow() {
-  if (nameField.value != "") {
-    const newplace: Place = {
-      name: nameField.value,
-      activity: activityField.value,
-      rating: ratingField.value,
-      visited:visitedField.value
-    }
-    await axios.post<Place[]>(endpoint, newplace)
-    return alert('Please enter a name for your new place.')
+  if (
+    !nameField.value.trim() ||
+    !activityField.value.trim() ||
+    !descriptionField.value.trim() ||
+    !ratingField.value ||
+    typeof visitedField.value !== 'boolean'
+  ) {
+    alert('Please fill in all fields before adding a new place.')
+    return
   }
 
   const payload = {
@@ -164,6 +170,17 @@ async function handleAddRow() {
   }
 }
 
+// Add this function in your <script setup lang="ts">
+async function handleDeleteRow(place: Place, index: number) {
+  if (!place.id) return alert('Cannot delete: missing id')
+  try {
+    await axios.delete(`${endpoint}/${place.id}`)
+    items.value.splice(index, 1)
+  } catch (error) {
+    console.error('Delete failed:', error)
+    alert('Delete failed—check console for details.')
+  }
+}
 onMounted(async () => {
   loadPlaces()
 })
