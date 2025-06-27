@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-    <div class="table-responsive">
+    <div v-if="items.length" class="table-responsive">
       <table class="table align-middle">
         <thead class="table-light">
           <tr>
@@ -108,8 +108,8 @@ const items = ref<Place[]>([
     activity: '',
     description: '',
     rating: 0,
-    visited: false,
-  },
+    visited: false
+  }
 ])
 
 // input fields for the “new place” row
