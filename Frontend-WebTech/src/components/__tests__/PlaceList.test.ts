@@ -5,28 +5,38 @@ import type { Place } from '../types/place.ts'
 
 describe('PlaceList', () => {
   const mockPlaces: Place[] = [
-    { id: 1, name: 'Beach', activity: 'Swimming', rating: 5, visited: false }
+    {
+      id: 1,
+      name: 'Beach',
+      activity: 'Swimming',
+      rating: 5,
+      visited: false,
+      description: '' // Füge hier die 'description' hinzu
+    }
   ]
+
 
   it('renders all places', () => {
     const wrapper = mount(PlaceList, {
       props: { places: mockPlaces }
     })
-
-    // Find the specific table cell containing the place name input
-    const nameInput = wrapper.find('[data-place-id="1"] .place-name input')
-    const activityInput = wrapper.find('[data-place-id="1"] .place-activity input')
-
-    expect(nameInput.element.nodeValue).toBe('Beach')
-    expect(activityInput.element.nodeValue).toBe('Swimming')
+    const nameInput = wrapper.find(
+      '[data-place-id="1"] input[placeholder="Enter name"]'
+    )
+    const activityInput = wrapper.find(
+      '[data-place-id="1"] input[placeholder="Enter activity"]'
+    )
+    expect((nameInput.element as HTMLInputElement).value).toBe('Beach')
+    expect((activityInput.element as HTMLInputElement).value).toBe('Swimming')
   })
 
   it('emits update event when name is changed', async () => {
     const wrapper = mount(PlaceList, {
       props: { places: mockPlaces }
     })
-
-    const input = wrapper.find('[data-place-id="1"] .place-name input')
+    const input = wrapper.find(
+      '[data-place-id="1"] input[placeholder="Enter name"]'
+    )
     await input.setValue('New Beach')
 
     const updateEvent = wrapper.emitted('update')
@@ -34,6 +44,24 @@ describe('PlaceList', () => {
     expect(updateEvent![0][0]).toEqual({
       ...mockPlaces[0],
       name: 'New Beach'
+    })
+  })
+
+  it('emits update event when visited is toggled', async () => {
+    const wrapper = mount(PlaceList, {
+      props: { places: mockPlaces }
+    })
+
+    const checkbox = wrapper.find(
+      '[data-place-id="1"] input[type="checkbox"]'
+    )
+    await checkbox.setValue(true)
+
+    const updateEvent = wrapper.emitted('update')
+    expect(updateEvent).toBeTruthy()
+    expect(updateEvent![0][0]).toEqual({
+      ...mockPlaces[0],
+      visited: true
     })
   })
 
@@ -49,3 +77,4 @@ describe('PlaceList', () => {
     expect(deleteEvent![0][0]).toBe(1)
   })
 })
+
