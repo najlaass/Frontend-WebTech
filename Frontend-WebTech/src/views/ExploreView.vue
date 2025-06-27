@@ -96,7 +96,10 @@
                 :class="{ active: index === 0 }"
                 :key="image"
               >
-                <img :src="image" class="d-block w-100" alt="Place image" />
+                <div class="ratio ratio-1x1">
+                  <img :src="image" class="d-block w-100 img-fluid object-fit-cover ratio ratio-1x1" alt="Place image" />
+                </div>
+
               </div>
             </div>
             <button
