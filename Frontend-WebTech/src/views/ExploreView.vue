@@ -196,9 +196,9 @@ const places = ref<PlaceWithDetails[]>([
     location: 'Berlin',
     name: 'Brandenburger Tor',
     rating: 4,
-    visited: true,
+    visited: false,
     avatar: 'https://i.pravatar.cc/48?u=2',
-    favorite: true,
+    favorite: false,
     description:
       'The Brandenburg Gate is an 18th-century neoclassical monument in Berlin, commissioned by King Frederick William II and completed in 1791. Serving as a symbol of unity and peace, it has witnessed pivotal moments in German history—from Napoleon’s victory march to the fall of the Berlin Wall—making it one of the city’s most iconic landmarks.',
     images: ['https://images.pexels.com/photos/18576930/pexels-photo-18576930.jpeg'],
@@ -225,9 +225,9 @@ const places = ref<PlaceWithDetails[]>([
     location: 'Hamburg',
     name: 'Speicherstadt',
     rating: 5,
-    visited: true,
+    visited: false,
     avatar: 'https://i.pravatar.cc/48?u=4',
-    favorite: true,
+    favorite: false,
     description:
       'Speicherstadt, the world’s largest warehouse district, was built from 1883–1927 on timber-pile foundations in Hamburg’s port. Its red-brick Neo-Gothic warehouses, interlaced by canals and iron bridges, once stored carpets, tea, and spices. Today it’s a UNESCO World Heritage site and a photogenic slice of maritime trade history.',
     images: [

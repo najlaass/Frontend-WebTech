@@ -1,6 +1,6 @@
 <template>
   <div class="mb-4">
-    <div v-if="items.length" class="table-responsive">
+    <div class="table-responsive">
       <table class="table align-middle">
         <thead class="table-light">
           <tr>
@@ -13,37 +13,37 @@
           </tr>
         </thead>
         <tbody>
-        <tr>
-        <td>
-          <input v-model="nameField" type="text" class="form-control" placeholder="Name" />
-        </td>
-        <td>
-          <input
-            v-model="activityField"
-            type="text"
-            class="form-control"
-            placeholder="Activity"
-          />
-        </td>
-        <td>
+          <tr>
+            <td>
+              <input v-model="nameField" type="text" class="form-control" placeholder="Name" />
+            </td>
+            <td>
+              <input
+                v-model="activityField"
+                type="text"
+                class="form-control"
+                placeholder="Activity"
+              />
+            </td>
+            <td>
               <textarea
                 v-model="descriptionField"
                 class="form-control"
                 placeholder="Description"
               ></textarea>
-        </td>
-        <td>
-          <select v-model="ratingField" class="form-select">
-            <option disabled value="0">Select</option>
-            <option v-for="r in [1, 2, 3, 4, 5]" :key="r" :value="r">
-              {{ '⭐'.repeat(r) }} ({{ r }})
-            </option>
-          </select>
-        </td>
-        <td class="text-center">
-          <input class="form-check-input" type="checkbox" v-model="visitedField" />
-        </td>
-        </tr>
+            </td>
+            <td>
+              <select v-model="ratingField" class="form-select">
+                <option disabled value="0">Select</option>
+                <option v-for="r in [1, 2, 3, 4, 5]" :key="r" :value="r">
+                  {{ '⭐'.repeat(r) }} ({{ r }})
+                </option>
+              </select>
+            </td>
+            <td class="text-center">
+              <input class="form-check-input" type="checkbox" v-model="visitedField" />
+            </td>
+          </tr>
           <tr v-for="(place, index) in items" :key="index">
             <td>
               <input v-model="place.name" type="text" class="form-control" placeholder="Name" />
@@ -75,7 +75,11 @@
               <input class="form-check-input" type="checkbox" v-model="place.visited" />
             </td>
             <td class="text-center">
-              <button v-if="place.id" @click="handleDeleteRow(place, index)" class="btn btn-danger btn-sm">
+              <button
+                v-if="place.id"
+                @click="handleDeleteRow(place, index)"
+                class="btn btn-danger btn-sm"
+              >
                 <i class="bi bi-trash"></i> Delete
               </button>
             </td>
@@ -108,8 +112,8 @@ const items = ref<Place[]>([
     activity: '',
     description: '',
     rating: 0,
-    visited: false
-  }
+    visited: false,
+  },
 ])
 
 // input fields for the “new place” row
@@ -181,8 +185,8 @@ async function handleDeleteRow(place: Place, index: number) {
     alert('Delete failed—check console for details.')
   }
 }
+
 onMounted(async () => {
   loadPlaces()
 })
-
 </script>
