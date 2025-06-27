@@ -7,12 +7,7 @@
       <div class="d-flex align-items-center gap-3">
         <div class="input-group">
           <span class="input-group-text">🔍</span>
-          <input
-            v-model="search"
-            type="text"
-            class="form-control"
-            placeholder="Search..."
-          />
+          <input v-model="search" type="text" class="form-control" placeholder="Search..." />
         </div>
 
         <select v-model="sortBy" class="form-select">
@@ -172,6 +167,7 @@ const places = ref<PlaceWithDetails[]>([
       'Rising majestically over Aachen’s old town, the Aachener Dom (Aachen Cathedral) is a striking blend of Carolingian core and later Gothic additions, originally commissioned by Charlemagne in the 8th century. As Germany’s first UNESCO World Heritage site, its octagonal Palatine Chapel—with its ornate mosaics and the famous marble throne—draws pilgrims and architecture enthusiasts alike, offering a vivid window into medieval art, religion, and imperial power.',
     images: [
       'https://www.aachenerdom.de/app/uploads/2021/06/ANS-dom-neues-lichtkonzept-2020-0068-1024x682.jpg',
+      'https://images.pexels.com/photos/18837239/pexels-photo-18837239.jpeg',
     ],
   },
   {
@@ -189,6 +185,68 @@ const places = ref<PlaceWithDetails[]>([
       'https://www.htw-berlin.de/files/Presse/user_upload/_MG_0088.jpg',
       'https://www.htw-berlin.de/files/Presse/user_upload/Erstsemesterbegruessung2012_40.jpg',
       'https://www.htw-berlin.de/files/Presse/Pressefotos/HTW_Berlin_Wilhelminenhof_Strand_1.jpg',
+    ],
+  },
+  {
+    id: 2,
+    user: 'Lukas',
+    location: 'Berlin',
+    name: 'Brandenburger Tor',
+    rating: 4,
+    visited: true,
+    avatar: 'https://i.pravatar.cc/48?u=2',
+    favorite: true,
+    description:
+      'The Brandenburg Gate is an 18th-century neoclassical monument in Berlin, commissioned by King Frederick William II and completed in 1791. Serving as a symbol of unity and peace, it has witnessed pivotal moments in German history—from Napoleon’s victory march to the fall of the Berlin Wall—making it one of the city’s most iconic landmarks.',
+    images: ['https://images.pexels.com/photos/18576930/pexels-photo-18576930.jpeg'],
+  },
+  {
+    id: 3,
+    user: 'Sophie',
+    location: 'Munich',
+    name: 'Marienplatz',
+    rating: 4,
+    visited: false,
+    avatar: 'https://i.pravatar.cc/48?u=3',
+    favorite: false,
+    description:
+      'Marienplatz is Munich’s central square since 1158, named after the Mariensäule column erected in 1638. Lined by historic buildings like the Neues Rathaus, its famous Glockenspiel reenacts stories of Bavarian history daily, drawing crowds beneath its ornate façade and offering a vibrant atmosphere at the heart of the city.',
+    images: [
+      'https://images.pexels.com/photos/8405804/pexels-photo-8405804.jpeg?_gl=1*d1uun*_ga*MjEzMTE0NTAyMi4xNzUwMDgxNTE4*_ga_8JE65Q40S6*czE3NTEwMjIzNzAkbzQkZzEkdDE3NTEwMjI0MDIkajI4JGwwJGgw',
+      'https://images.pexels.com/photos/3623710/pexels-photo-3623710.png?_gl=1*1qh0zhi*_ga*MjEzMTE0NTAyMi4xNzUwMDgxNTE4*_ga_8JE65Q40S6*czE3NTEwMjIzNzAkbzQkZzEkdDE3NTEwMjI0ODUkajU5JGwwJGgw',
+    ],
+  },
+  {
+    id: 4,
+    user: 'Max',
+    location: 'Hamburg',
+    name: 'Speicherstadt',
+    rating: 5,
+    visited: true,
+    avatar: 'https://i.pravatar.cc/48?u=4',
+    favorite: true,
+    description:
+      'Speicherstadt, the world’s largest warehouse district, was built from 1883–1927 on timber-pile foundations in Hamburg’s port. Its red-brick Neo-Gothic warehouses, interlaced by canals and iron bridges, once stored carpets, tea, and spices. Today it’s a UNESCO World Heritage site and a photogenic slice of maritime trade history.',
+    images: [
+      'https://images.pexels.com/photos/16916258/pexels-photo-16916258.jpeg',
+      'https://images.pexels.com/photos/29536802/pexels-photo-29536802.jpeg',
+      'https://images.pexels.com/photos/28512492/pexels-photo-28512492.jpeg',
+    ],
+  },
+  {
+    id: 5,
+    user: 'Emma',
+    location: 'Cologne',
+    name: 'Kölner Dom',
+    rating: 5,
+    visited: false,
+    avatar: 'https://i.pravatar.cc/48?u=5',
+    favorite: false,
+    description:
+      'The Cologne Cathedral (Kölner Dom) is a masterpiece of Gothic architecture begun in 1248 and completed in 1880. Famous for its twin spires—the tallest in the world at the time—and its stunning stained-glass windows, it remains Germany’s most visited landmark and a symbol of faith and endurance.',
+    images: [
+      'https://images.pexels.com/photos/32488813/pexels-photo-32488813.jpeg',
+      'https://images.pexels.com/photos/29903167/pexels-photo-29903167.jpeg',
     ],
   },
 ])
